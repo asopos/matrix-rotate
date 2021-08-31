@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 
 function MatrixComponent() {
-
+    const dimension = 3
     const [matrix, setMatrix] = useState(
         [
             [1,2,3],
@@ -11,53 +11,58 @@ function MatrixComponent() {
         ]
     )
 
-    /*
-    (0,0) --> (0,2)
-    (0,1) --> (1,2)
-    (0,2) --> (2,2)
-
-    (1,0) --> (0,1)
-    (1,1) --> (1,1)
-    (1,2) --> (2,1)
-
-    */
     const rotateMatrix  = (matrix) => {        
         let rotatedMatrix = []
         for (let i = 0; i < matrix.length; i++) {
             rotatedMatrix.push([])
         }
-        let dimension = matrix.length-1;
+        let depth = matrix.length-1;
 
         for (let i = 0; i < matrix.length; i++) {
             for (let j = 0; j < matrix[i].length; j++) {
-                rotatedMatrix[j][dimension] = matrix[i][j];
+                rotatedMatrix[j][depth] = matrix[i][j];
             }
-            dimension--;
+            depth--;
         }
         setMatrix(rotatedMatrix);
     }
-    const generateRandomMatrix = (dimension) => {
+    const generateRandomMatrix = () => {
         let randomMatrix = []
         for (let i = 0; i < dimension; i++) {
             randomMatrix.push([])
         }
-
+        for (let i = 0; i < dimension; i++) {
+            for (let j = 0; j < dimension; j++) {
+                randomMatrix[i][j] = Math.floor(Math.random() * 101);
+            }
+        }
+        setMatrix(randomMatrix)
     }
-    return (<div className="grid grid-cols-3 gap-8 w-1/2 h-1/2">
+    const settingValue = (rowIndex, colIndex, value) => {
+        let tmpMatrix = [...matrix];
+        tmpMatrix[rowIndex][colIndex] = value
+        setMatrix(tmpMatrix)
+    }
+    return (
 
-    {matrix.map( (rows) => {
+    <div className="grid grid-cols-3 gap-8">
+
+    {matrix.map( (rows, rowIndex) => {
         return(
-        rows.map( (elem) =>{
+        rows.map( (elem, colIndex) =>{
             return (
-            <div class="flex flex-col shadow justify-center h-24 w-24  bg-white rounded">
-                <div>
-                    <p class="text-3xl font-semibold text-center text-gray-800">{elem}</p>
-                </div>
+            <div className="flex flex-col shadow justify-center h-24 w-24  bg-white rounded">
+
+                <input max="5" onChange={(event) => settingValue(rowIndex,colIndex, event.target.value)} className="text-3xl font-semibold text-center text-gray-800" value={elem}></input>
         </div>)
         }))
     })}
-    <button onClick={() => {rotateMatrix(matrix)}}>test</button>
-    </div>)
+    <div className="flex col-span-3 gap-6">
+    <button className="hover:bg-gray-700 text-white font-bold py-2 px-4 border border-gray-700 rounded " onClick={() => {rotateMatrix(matrix)}}>Rotate</button>
+    <button className="hover:bg-gray-700 text-white font-bold py-2 px-4 border border-gray-700 rounded " onClick={() => {generateRandomMatrix()}}>Generate Random Matrix</button>
+    </div>
+    </div>
+    )
 }
 
 export default MatrixComponent;
