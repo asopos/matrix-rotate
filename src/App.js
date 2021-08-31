@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-import './App.css';
 import MatrixComponent from './components/MatrixComponent'
 
 function App() {
