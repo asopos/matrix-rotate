@@ -62,7 +62,7 @@ function MatrixComponent() {
             }}
         >
         <p className="text-white text-center col-span-3 text-5xl p-8">Matrix Rotate</p>
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-3 place-items-center gap-8 mx-auto">
     {matrix.map( (rows, rowIndex) => {
         return(
         rows.map( (elem, colIndex) =>{
@@ -73,7 +73,7 @@ function MatrixComponent() {
                 flipId={elem.id}
                 translate
                 >
-            <div key={elem.id} className="flex flex-col shadow justify-center h-20 w-20 bg-white rounded ">
+            <div key={elem.id} className="flex flex-col shadow justify-center h-16 w-16 sm:h-20 sm:w-20 bg-white rounded-lg">
                 <input  maxLength="5" onChange={(event) => settingValue(rowIndex, colIndex, event.target.value)} className="text-3xl font-semibold text-center text-gray-800" value={elem.value}></input>
             </div>
         </Flipped>
