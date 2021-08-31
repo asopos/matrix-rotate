@@ -1,8 +1,8 @@
-import MatrixComponent from './components/MatrixComponent'
+import MatrixComponent from './components/Matrix'
 
 function App() {
   return (
-    <div className="flex bg-gray-500 justify-center p-12">
+    <div className="flex app bg-gray-500 justify-center p-12">
       <MatrixComponent/>
     </div>
   );
