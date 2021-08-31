@@ -1,6 +1,9 @@
-# Getting Started with Create React App
+# Matrix Rotate
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+A simple React application that rotates a matrix 90 degrees.
+The implementation lies at [Matrix-Rotate](https://matrix-rotate.herokuapp.com/).
 
 ## Available Scripts
 
